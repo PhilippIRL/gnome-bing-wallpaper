@@ -2,7 +2,7 @@ import sys
 if sys.version_info[0] < 3: # raise an exception in case of running under python2 environment.
     raise BaseException('Please run under python3 environment.')
 
-import os, requests, json
+import os, requests, json, pathlib
 
 current_dir = os.path.dirname(os.path.realpath(__file__))   # get this script current path.
 base_url = 'http://www.bing.com'    # bing website base url.
@@ -36,14 +36,15 @@ def download_image(img_link):
 
 def set_wallpaper():
     """
-        Downloads and sets received image from bing.com as xfce4 current wallpaper.
+        Downloads and sets received image from bing.com as gnome current wallpaper.
     """
 
     name = download_image(base_url + get_image_link())  # make complete image link and download it.
     path = os.path.join(current_dir, 'img', name)  # get image full path.
+    uri = pathlib.Path(path).as_uri() # get image path as uri
 
-    # create command string to change last-image attribute which corresponds to desktop current background.
-    cmd_set_last_image = 'xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s {0}'.format(path)
+    # create command string to change the desktop wallpaper
+    cmd_set_last_image = 'gsettings set org.gnome.desktop.background picture-uri {0}'.format(uri)
 
     # execute generated command above using os module although this can be done using subprocess module.
     os.system(cmd_set_last_image)
