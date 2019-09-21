@@ -8,7 +8,7 @@ countryCode='en-US' # country code, e.g. en-US or de-DE
 
 current_dir = os.path.dirname(os.path.realpath(__file__))   # get this script current path.
 base_url = 'http://www.bing.com'    # bing website base url.
-hpimagearchive_url = '/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=%s' % country  # this part makes a request to get image of the day.
+hpimagearchive_url = '/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=%s' % countryCode  # this part makes a request to get image of the day.
 target_image = None # target image to set as wallpaper.
 
 
