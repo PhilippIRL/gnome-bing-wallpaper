@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys
 if sys.version_info[0] < 3: # raise an exception in case of running under python2 environment.
     raise BaseException('Please run under python3 environment.')
